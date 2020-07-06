@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1587144165 source:c:\proiecte2020\lab_8\aplicatie_algoritmi\main.cpp
+	<iostream>
+	<stdlib.h>
+	<time.h>
+
