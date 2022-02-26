@@ -1,2 +1,2 @@
-### `AlgorithmsApplication`
+# AlgorithmsApplication
 Application that initializes two series of integer numeric values, a and b, with random values. Then perform the following processes: Sort series a using Bubble Sort and series b using Insertion Sort; Invert the series b. Interclass the ordered series a and b to obtain a new series, c; Displays on the screen how many values in the series c meet the conditions: they are divisible by 3; are divisible by 5; are divisible by both 3 and 5. Check if a certain value is present in the series c; Write the values in series c to a file on disk.
