@@ -18,32 +18,59 @@ int main()
 {
     int a[100], b[100] , c[100];
     int n =7;
-    // Pornesc generatorul de numere aleatoare cu o
-    // valoare returnata de time().
-    //srand( (unsigned) time ( NULL ) );
-    // Creez cele n valori aleatoare.
+    // I start the random number generator
+    // Create the n random values.
     initial(a, n);
     initial(b, n);
+    //Sort ascending the string "a" with a Bubble Sort
     ordonCresc(a, n);
+    //Display the string a
+    cout << "String 'a' sorted ascending (Bubble Sort):" << endl;
+    for (int i = 0; i < n-1; i++)
+        cout << a[i] << ", ";
+    cout << a[n-1];
+
+    //Sort descending the string "b" with an Insertion Sort
     ordonDescresc(b, n);
+    //Display the string b
+    cout << endl;
+    cout << "String 'b' sorted descending (Insertion Sort):" << endl;
+    for (int i = 0; i < n-1; i++)
+        cout << b[i] << ", ";
+    cout << b[n-1];
+
+    //Invert the series b
     invers(b, n);
+    //Merge the ordered series a and b to obtain a new series c ascending
+    //order
     inter(a, b, c, n, n);
-    //Afisez sirul c
+    //Display the string c
+    cout << endl;
+    cout << "Merged ascending strings a and b:" << endl;
     for (int i = 0; i < 2*n - 1; i++)
         cout << c[i] << ", ";
     cout << c[2*n - 1] << endl;
 
     int div3, div5, div3_5;
 
+    //Display how many values in the series c meet the conditions: they are
+    //divisible by 3 (nrdiv3); are divisible by 5 (nrdin5); are divisible
+    //by both 3 and 5(nrdiv3si5).
     divizibil(c, 2*n, div3, div5, div3_5);
 
-    cout << "Div. cu 3: " << div3 << " numere, " << endl;
-    cout << "Div. cu 5: " << div5 << " numere, " << endl;
-    cout << "Div. cu 3 si 5: " << div3_5 << " numere." << endl;
+    cout << "Divisible by 3: " << div3 << " numbers, " << endl;
+    cout << "Divisible by 5: " << div5 << " numbers, " << endl;
+    cout << "Divisible by 3 and 5: " << div3_5 << " numbers." << endl;
+
+    //Check if a certain value 6334 is present in the series c
+    cout << "Check if a certain value 6334 is present in the series c:";
+    cout << endl;
     if (prezent(6334, c, 2*n))
-        cout << "Prezent!" << endl;
+        cout << "Present!" << endl;
     else
         cout << "Absent!" << endl;
+
+    //Write the values in series c to a file fdate.txt on disk
     scriu(c, 2*n);
 
     return 0;
@@ -57,6 +84,7 @@ void initial(int a[], int n)
         a[i] = rand();
 }
 
+//Bubble Sort ascending order
 void ordonCresc(int a[], int n)
 {
    int i, aux, fanion, k;
@@ -64,7 +92,7 @@ void ordonCresc(int a[], int n)
 
    do
    {
-      fanion = 0;//Initializez in afara ciclului
+      fanion = 0;//Initialize outside the cycle
 
       for(i = 0; i < n - 1 - k; i++)
       {
@@ -73,19 +101,20 @@ void ordonCresc(int a[], int n)
             aux = a[i];
             a[i] = a[i + 1];
             a[i + 1] = aux;
-            fanion = 1;//S-a facut o inversare
+            fanion = 1;//A reversal has been made
          }
       }
       k++;
    }
-   while (fanion);//Sirul este ordonat
+   while (fanion);//The string is ordered
 }
 
+//Insertion Sort descending order
 void ordonDescresc(int a[], int n)
 {
     int i, j, aux;
 
-    for(i = 1; i < n; i++)  //  i este marcajul
+    for(i = 1; i < n; i++)  //  i is the mark
     {
         for(j = i; j > 0; j--)
         {
@@ -99,6 +128,7 @@ void ordonDescresc(int a[], int n)
     }
 }
 
+//Invert the series
 void invers(int a[], int n)
 {
     int i, j, aux;
@@ -111,6 +141,8 @@ void invers(int a[], int n)
     }
 }
 
+//Merge the ordered series a and b to obtain a new series rez ascending
+//order
 void inter(int a[], int b[], int rez[], int na, int nb)
 {
 	int i=0, j=0;
@@ -143,6 +175,9 @@ void inter(int a[], int b[], int rez[], int na, int nb)
 	while(i + j < na + nb);
 }
 
+//How many values in the series c meet the conditions: they are divisible
+//by 3 (nrdiv3); are divisible by 5 (nrdin5); are divisible by both 3 and 5
+//(nrdiv3si5).
 void divizibil(int a[], int n, int &nrdiv3, int &nrdiv5, int &nrdiv3si5)
 {
     int i;
@@ -161,6 +196,7 @@ void divizibil(int a[], int n, int &nrdiv3, int &nrdiv5, int &nrdiv3si5)
     }
 }
 
+//Check if a certain value x is present in the series v
 int prezent(int x, int v[], int n)
 {
    int mini, maxi, mijloc;
@@ -181,6 +217,7 @@ int prezent(int x, int v[], int n)
    return -1;              //  Absent!
 }
 
+//Write the values in series c to a file fdate.txt on disk
 void scriu(int a[], int n)
 {
     fstream fd;
